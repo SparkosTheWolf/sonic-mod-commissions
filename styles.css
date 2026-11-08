@@ -1,0 +1,875 @@
+@font-face {
+    font-family: 'Mediocre Cartoon';
+    src: url('./fonts/MediocreCartoon-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SEGA Logo';
+    src: url('./fonts/segalogofontrusbylyajka.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Solid Soldier';
+    src: url('./fonts/Solid-Soldier-Cyrillic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #000000;
+    color: #ffffff;
+    font-family: 'Mediocre Cartoon', Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
+}
+
+header h1 {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+header nav ul {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+}
+
+header nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+header nav a:hover {
+    color: #007bff;
+}
+
+.cells {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+}
+
+.cells::-webkit-scrollbar {
+    display: none;
+}
+
+.cells section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.intro {
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.sonic-container {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.sonic {
+    position: absolute;
+    background: transparent;
+    width: 180px;
+    height: auto;
+    animation: sonic-run 3s linear forwards;
+}
+
+@keyframes sonic-run {
+    0% {
+        left: -200px;
+        transform: scaleX(1);
+    }
+
+    24% {
+        left: 100%;
+        transform: scaleX(1);
+    }
+
+    25% {
+        left: 100%;
+        transform: scaleX(-1);
+    }
+
+    49% {
+        left: -200px;
+        transform: scaleX(-1);
+    }
+
+    50% {
+        left: -200px;
+        transform: scaleX(1);
+    }
+
+    100% {
+        left: 100%;
+        transform: scaleX(1);
+    }
+}
+
+.sparkos-title {
+    position: absolute;
+    font-family: 'SEGA logo', 'Arial Black', sans-serif;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    transform: translateY(-50%);
+
+    font-size: clamp(38px, 10vw, 120px);
+    font-weight: 100;
+    letter-spacing: clamp(10px, 2vw, 24px);
+
+    color: white;
+    opacity: 0;
+
+    z-index: 1;
+
+    text-shadow: 0 0 30px rgba(51, 51, 51, 0.7);
+
+    animation: show-sparkos 3s forwards;
+}
+
+@keyframes show-sparkos {
+    0%, 65% {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.5);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.3);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.3);
+    }
+}
+
+.example-mods {
+    background: #101827;
+}
+
+.supported-games {
+    background: #0c1420;
+}
+
+.calculator {
+    background: #151515;
+}
+
+.leave-request {
+    background: #080d18;
+}
+
+.cells section h2 {
+    font-size: clamp(30px, 5vw, 100%);
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.navigation-right {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 150;
+}
+
+.navigation-right button {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #1685ff;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.navigation-right button:hover {
+    background: #1685ff;
+    box-shadow: 0 0 15px rgba(22, 133, 255, 0.6);
+}
+
+#down {
+    transform: rotate(180deg);
+}
+
+#up, #down {
+    color: #aaa;
+}
+
+#up:hover, #down:hover {
+    color: white;
+}
+
+#counter {
+    color: #aaa;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    background: rgba(0, 0, 0, 0.85);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #888;
+    font-size: 12px;
+    z-index: 100;
+}
+
+@media (max-width: 700px) {
+    header {
+        height: 65px;
+        padding: 0 15px;
+    }
+
+    header h1 {
+        font-size: 17px;
+    }
+
+    header nav ul {
+        gap: 12px;
+    }
+
+    header nav a {
+        font-size: 12px;
+    }
+
+    .navigation-right {
+        right: 10px;
+    }
+
+    .sonic {
+        width: 130px;
+    }
+
+    .sparkos-title {
+        letter-spacing: clamp(7px, 2vw, 14px);
+    }
+
+    footer {
+        padding: 0 15px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    header {
+        padding: 0 10px;
+    }
+
+    header h1 {
+        font-size: 14px;
+    }
+
+    header nav ul {
+        gap: 8px;
+    }
+
+    header nav a {
+        font-size: 10px;
+    }
+
+    .sparkos-title {
+        letter-spacing: clamp(5px, 2vw, 8px);
+    }
+}
+
+header {
+    gap: 20px;
+}
+
+.lang-switcher {
+    display: inline-flex;
+    flex-shrink: 0;
+    gap: 3px;
+    padding: 3px;
+    border: 1px solid rgba(22, 133, 255, 0.45);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.lang-option {
+    min-width: 34px;
+    padding: 5px 8px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #aaa;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.lang-option.active {
+    background: #1685ff;
+    color: #fff;
+}
+
+.navigation-right button {
+    display: grid;
+    place-items: center;
+}
+
+#down {
+    transform: rotate(180deg);
+}
+
+.intro-cta {
+    position: absolute;
+    z-index: 3;
+    bottom: 90px;
+    padding: 12px 22px;
+    border: 1px solid #1685ff;
+    border-radius: 24px;
+    background: #1685ff;
+    color: #fff;
+    font: inherit;
+    cursor: pointer;
+}
+
+.cell-content {
+    width: min(1120px, calc(100% - 150px));
+    max-height: calc(100vh - 145px);
+    margin: 82px auto 63px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #1685ff rgba(255, 255, 255, 0.08);
+    overscroll-behavior: contain;
+}
+
+.cell-content h2 {
+    margin-bottom: 10px;
+}
+
+.section-description {
+    margin: 0 0 22px;
+    color: #aaa;
+    text-align: center;
+}
+
+.hero-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0 0 18px;
+}
+
+.status-chip {
+    padding: 8px 14px;
+    border: 1px solid rgba(22, 133, 255, 0.35);
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.status-chip.open {
+    color: #91f4a8;
+}
+
+.status-chip.closed {
+    color: #ff7a7a;
+}
+
+.slots {
+    color: #ccc;
+}
+
+.examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 18px;
+    padding: 8px 0 20px;
+}
+
+.example-card {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    border: 1px solid rgba(22, 133, 255, 0.35);
+    border-radius: 12px;
+    background: #080d18;
+    isolation: isolate;
+}
+
+.new-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1;
+    padding: 5px 11px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    background: #1685ff;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.example-card > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.example-card:hover > img,
+.example-card:focus > img,
+.example-card.active > img {
+    transform: scale(1.04);
+}
+
+.mod-info {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    padding: 14px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.88);
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.example-card:hover .mod-info,
+.example-card:focus .mod-info,
+.example-card:focus-within .mod-info,
+.example-card.active .mod-info {
+    opacity: 1;
+}
+
+.mod-info h3,
+.mod-info p {
+    margin: 0;
+}
+
+.mod-info h3 {
+    color: #58aaff;
+}
+
+.mod-info a {
+    color: #78bdff;
+}
+
+.game-logo {
+    display: inline-block;
+    width: 150px !important;
+    height: 48px;
+    max-width: 100%;
+    margin-top: 5px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.game-card,
+.calculator-card,
+.order-card,
+.orders-list {
+    border: 1px solid rgba(22, 133, 255, 0.28);
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.game-card {
+    padding: 18px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-3px);
+    border-color: #1685ff;
+}
+
+.game-card h3 {
+    margin: 0 0 9px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.game-card p,
+.game-card li {
+    color: #ccc;
+    line-height: 1.45;
+}
+
+.game-card ul {
+    padding-left: 20px;
+}
+
+.game-tag {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 4px 10px;
+    border: 1px solid rgba(22, 133, 255, 0.45);
+    border-radius: 14px;
+    color: #78bdff;
+    font-size: 13px;
+}
+
+.calculator-card,
+.order-card {
+    padding: 22px;
+}
+
+.form-row {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.form-row label {
+    color: #fff;
+    font-weight: 700;
+}
+
+.form-row select,
+.form-row input,
+.form-row textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(22, 133, 255, 0.35);
+    border-radius: 8px;
+    background: #0c1420;
+    color: #fff;
+    font: inherit;
+}
+
+.form-row textarea {
+    resize: vertical;
+}
+
+.extras-head,
+.estimate-line {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.extras-count {
+    color: #78bdff;
+}
+
+.extras-hint,
+.price-note,
+.estimate-footnote {
+    color: #aaa;
+}
+
+.extras-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 10px;
+}
+
+.extra-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 20px 1fr auto;
+    gap: 10px;
+    padding: 13px;
+    border: 1px solid rgba(22, 133, 255, 0.25);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    cursor: pointer;
+}
+
+.extra-card.selected {
+    border-color: #1685ff;
+    background: rgba(22, 133, 255, 0.13);
+}
+
+.extra-checkbox {
+    width: auto !important;
+    margin-top: 3px;
+}
+
+.extra-body {
+    display: grid;
+    gap: 4px;
+}
+
+.extra-description {
+    color: #aaa;
+    font-size: 13px;
+}
+
+.extra-price {
+    color: #78bdff;
+    white-space: nowrap;
+}
+
+.estimate-panel {
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 10px;
+    background: rgba(22, 133, 255, 0.1);
+}
+
+.estimate-label {
+    color: #78bdff;
+    letter-spacing: 1px;
+}
+
+.estimate-value {
+    margin: 10px 0;
+    font-size: clamp(24px, 4vw, 36px);
+}
+
+.estimate-breakdown {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.estimate-line {
+    color: #ccc;
+}
+
+.estimate-footnote {
+    font-size: 13px;
+}
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.form-actions button {
+    padding: 11px 16px;
+    border: 1px solid #1685ff;
+    border-radius: 8px;
+    background: #1685ff;
+    color: #fff;
+    font: inherit;
+    cursor: pointer;
+}
+
+.form-actions .secondary {
+    background: transparent;
+    color: #78bdff;
+}
+
+.form-footer {
+    min-height: 24px;
+    margin-top: 12px;
+    color: #78bdff;
+}
+
+.orders-heading {
+    margin-top: 28px;
+}
+
+.orders-heading h3 {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.orders-list {
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+}
+
+.order-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 14px;
+    border: 1px solid rgba(22, 133, 255, 0.2);
+    border-radius: 10px;
+}
+
+.order-summary {
+    display: grid;
+    gap: 5px;
+}
+
+.order-status {
+    padding: 8px 12px;
+    border-radius: 18px;
+    white-space: nowrap;
+}
+
+.data-error {
+    margin: 16px 0;
+    padding: 12px;
+    border: 1px solid #ed5b68;
+    border-radius: 8px;
+    color: #ff9aa3;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.example-card:focus-visible {
+    outline: 2px solid #78bdff;
+    outline-offset: 3px;
+}
+
+@media (max-width: 850px) {
+    header {
+        height: auto;
+        min-height: 65px;
+        padding: 8px 15px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    header nav {
+        order: 3;
+        width: 100%;
+    }
+
+    header nav ul {
+        flex-wrap: wrap;
+        gap: 8px 16px;
+    }
+
+    header nav a {
+        font-size: 12px;
+    }
+
+    .lang-switcher {
+        margin-left: auto;
+    }
+
+    .cell-content {
+        width: calc(100% - 48px);
+        max-height: calc(100vh - 160px);
+        margin-top: 115px;
+        margin-bottom: 45px;
+    }
+}
+
+@media (max-width: 500px) {
+    .cell-content {
+        width: calc(100% - 36px);
+    }
+
+    .examples-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+    }
+
+    .example-card {
+        height: 240px;
+    }
+
+    .mod-info {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .game-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .calculator-card,
+    .order-card {
+        padding: 14px;
+    }
+
+    .order-item {
+        grid-template-columns: 1fr;
+    }
+
+    .order-status {
+        justify-self: start;
+    }
+
+    .intro-cta {
+        bottom: 75px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

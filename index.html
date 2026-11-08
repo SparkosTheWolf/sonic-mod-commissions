@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Sparkos - mod requests</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Sparkos</h1>
+        <nav data-i18n-aria-label="nav.menu" aria-label="Навигация">
+            <ul>
+                <li><a href="#example-mods" data-i18n="nav.examples">Примеры модов</a></li>
+                <li><a href="#supported-games" data-i18n="nav.games">Поддерживаемые игры</a></li>
+                <li><a href="#calculator" data-i18n="nav.calculator">Калькулятор заказа</a></li>
+                <li><a href="#leave-request" data-i18n="nav.order">Оставить заказ</a></li>
+            </ul>
+        </nav>
+        <div class="lang-switcher" role="group" data-i18n-aria-label="lang.label" aria-label="Язык">
+            <button type="button" class="lang-option" data-lang-option="ru" data-i18n="lang.ru" aria-pressed="true">RU</button>
+            <button type="button" class="lang-option" data-lang-option="en" data-i18n="lang.en" aria-pressed="false">EN</button>
+        </div>
+    </header>
+
+    <nav class="navigation-right" data-i18n-aria-label="nav.sections" aria-label="Навигация по разделам">
+        <button id="up" type="button" data-i18n-aria-label="nav.up" aria-label="Вверх">𖤂</button>
+        <span id="counter" aria-live="polite">1/5</span>
+        <button id="down" type="button" data-i18n-aria-label="nav.down" aria-label="Вниз">𖤂</button>
+    </nav>
+
+    <main class="cells" id="cells">
+        <section id="intro" class="intro">
+            <div class="sonic-container">
+                <img src="sonic.gif" alt="Sonic the Hedgehog" class="sonic">
+            </div>
+            <h1 class="sparkos-title">SPARKOS</h1>
+            <button id="start-commission" class="intro-cta" type="button" data-i18n="hero.cta">ОФОРМИТЬ ЗАКАЗ</button>
+        </section>
+
+        <section id="example-mods" class="example-mods">
+            <div class="cell-content" data-scrollable>
+                <h2 data-i18n="examples.title">Примеры модов</h2>
+                <p class="section-description" data-i18n="examples.subtitle">Работы из галереи предыдущего сайта.</p>
+                <div id="examples-grid" class="examples-grid"></div>
+            </div>
+        </section>
+
+        <section id="supported-games" class="supported-games">
+            <div class="cell-content" data-scrollable>
+                <h2 data-i18n="games.title">Поддерживаемые игры</h2>
+                <p class="section-description" data-i18n="games.subtitle">Игры и услуги, доступные для заказа.</p>
+                <div id="data-error" class="data-error" role="alert" hidden></div>
+                <div class="game-grid" id="game-grid"></div>
+            </div>
+        </section>
+
+        <section id="calculator" class="calculator">
+            <div class="cell-content" data-scrollable>
+                <h2 data-i18n="calc.title">Калькулятор заказа</h2>
+                <p class="section-description" data-i18n="calc.subtitle">Выберите игру, услугу и дополнительные опции.</p>
+                <div class="calculator-card">
+                    <form id="calculator-form">
+                        <div class="form-row">
+                            <label for="game-select" data-i18n="calc.game">Игра</label>
+                            <select id="game-select"></select>
+                        </div>
+                        <div class="form-row">
+                            <label for="service-select" data-i18n="calc.service">Основная услуга</label>
+                            <select id="service-select"></select>
+                        </div>
+                        <div class="form-row extras-block">
+                            <div class="extras-head">
+                                <label data-i18n="calc.extras">Дополнительные опции</label>
+                                <span class="extras-count" id="estimate-count"></span>
+                            </div>
+                            <p class="extras-hint" data-i18n="calc.extrasHint">Нажми на карточку, чтобы добавить опцию к заказу.</p>
+                            <div class="extras-grid" id="extras-row"></div>
+                        </div>
+                        <div class="form-row">
+                            <p class="price-note" data-i18n="calc.note">Дополнительные опции прибавляются к цене основной услуги.</p>
+                        </div>
+                    </form>
+                    <aside class="estimate-panel" aria-live="polite">
+                        <div class="estimate-label" data-i18n="calc.estimateLabel">ОРИЕНТИРОВОЧНАЯ СТОИМОСТЬ</div>
+                        <div class="estimate-value" id="estimated-price">—</div>
+                        <div class="estimate-breakdown">
+                            <div class="estimate-line"><span data-i18n="calc.basePrice">Базовая услуга</span><strong id="estimate-base">—</strong></div>
+                            <div class="estimate-line"><span data-i18n="calc.extrasTotal">Доп. опции</span><strong id="estimate-extras">—</strong></div>
+                        </div>
+                        <div class="estimate-footnote" data-i18n="calc.estimateFootnote">Окончательная цена может измениться после уточнения требований.</div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section id="leave-request" class="leave-request">
+            <div class="cell-content" data-scrollable>
+                <h2 data-i18n="order.title">Оставить заказ</h2>
+                <p class="section-description" data-i18n="order.subtitle">Заполните заявку и отправьте её в Telegram.</p>
+            <div class="hero-status">
+                <span class="status-chip" id="commission-chip" data-i18n="hero.loading">Загрузка...</span>
+                <span class="slots" id="slots-available"></span>
+            </div>
+            <div class="order-card">
+                    <form id="request-form">
+                        <div class="form-row">
+                            <label for="character-input" data-i18n="order.character">Персонаж</label>
+                            <input id="character-input" type="text" data-i18n-placeholder="order.characterPlaceholder" placeholder="Например, Shadow" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="description-input" data-i18n="order.description">Описание</label>
+                            <textarea id="description-input" rows="3" data-i18n-placeholder="order.descriptionPlaceholder" placeholder="Опишите желаемый мод"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label for="reference-input" data-i18n="order.references">Референсы</label>
+                            <textarea id="reference-input" rows="2" data-i18n-placeholder="order.referencesPlaceholder" placeholder="Ссылки, скриншоты или детали"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label for="model-link-input" data-i18n="order.modelLink">Ссылка на модель</label>
+                            <input id="model-link-input" type="url" data-i18n-placeholder="order.modelLinkPlaceholder" placeholder="Необязательная ссылка на модель">
+                        </div>
+                        <div class="form-row">
+                            <label for="additional-input" data-i18n="order.additional">Дополнительные требования</label>
+                            <textarea id="additional-input" rows="2" data-i18n-placeholder="order.additionalPlaceholder" placeholder="Любые дополнительные заметки"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="open-telegram" data-i18n="order.openTelegram">ОТКРЫТЬ TELEGRAM</button>
+                            <button type="button" id="copy-request" class="secondary" data-i18n="order.copyRequest">СКОПИРОВАТЬ ЗАЯВКУ</button>
+                        </div>
+                        <div class="form-footer" id="request-feedback" role="status" aria-live="polite"></div>
+                    </form>
+                </div>
+                <div class="orders-heading">
+                    <h3 data-i18n="orders.title">ТЕКУЩИЕ ЗАКАЗЫ</h3>
+                    <p class="section-description" data-i18n="orders.subtitle">Публичные статусы заказов.</p>
+                </div>
+                <div id="orders-list" class="orders-list"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p data-i18n="footer.text">© Персонажи принадлежат SEGA.</p>
+        <p>2026 Sparkos.</p>
+    </footer>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/orders.js"></script>
+    <script src="js/telegram.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/examples.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
