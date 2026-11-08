@@ -114,7 +114,7 @@ window.SonicI18n = (() => {
       'telegram.noUsername': 'Telegram-аккаунт не настроен',
       'telegram.clipboardUnavailable': 'Буфер обмена недоступен',
 
-      'footer.text': '© Персонажи принадлежат SEGA.'
+      'footer.text': '© Персонажи принадлежат SEGA, их авторам и правообладателям.'
 
     },
 
@@ -223,7 +223,7 @@ window.SonicI18n = (() => {
       'telegram.noUsername': 'Telegram username is not configured',
       'telegram.clipboardUnavailable': 'Clipboard is not available',
 
-      'footer.text': '© Characters belong to SEGA.'
+      'footer.text': '© Characters belong to SEGA, their authors and lawowners.'
     }
   };
 
